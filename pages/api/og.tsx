@@ -6,8 +6,13 @@ export const config = {
   runtime: 'edge',
 };
 
-export default function og(req: NextRequest) {
+const font = fetch(
+  new URL('../../assets/NotoSansJP-Medium.otf', import.meta.url)
+).then((res) => res.arrayBuffer());
+
+export default async function og(req: NextRequest) {
   const { searchParams } = new URL(req.url);
+  const fontData = await font;
 
   const title = searchParams.get('title');
   const date = format(new Date(searchParams.get('date')), 'MMMM dd, yyyy');
@@ -186,6 +191,13 @@ export default function og(req: NextRequest) {
     {
       width: 1200,
       height: 630,
+      fonts: [
+        {
+          name: 'NotoSansJP',
+          data: fontData,
+          style: 'normal',
+        },
+      ],
     },
   );
 }
