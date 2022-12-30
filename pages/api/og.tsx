@@ -7,7 +7,7 @@ export const config = {
 };
 
 const font = fetch(
-  new URL('../../assets/NotoSansJP-Medium.otf', import.meta.url)
+  new URL('../../assets/NotoSansCJKjp-Medium.ttf', import.meta.url)
 ).then((res) => res.arrayBuffer());
 
 export default async function og(req: NextRequest) {
@@ -25,7 +25,7 @@ export default async function og(req: NextRequest) {
         style={{
           background: '#e9f7fb',
           margin: '0 8px',
-          padding: '6px 18px',
+          padding: '10px 18px',
           borderRadius: '999px',
         }}
       >
