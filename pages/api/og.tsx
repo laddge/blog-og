@@ -19,19 +19,21 @@ export default async function og(req: NextRequest) {
   date = format(new Date(searchParams.get('date') || 0), 'MMMM dd, yyyy');
   const category = searchParams.get('category');
   const tags = [];
-  for (const tag of (searchParams.get('tags') || '').split(',')) {
-    tags.push(
-      <div
-        style={{
-          background: '#e9f7fb',
-          margin: '0 8px',
-          padding: '10px 18px',
-          borderRadius: '999px',
-        }}
-      >
-        {tag}
-      </div>
-    );
+  if (searchParams.get('tags')) {
+    for (const tag of (searchParams.get('tags') || '').split(',')) {
+      tags.push(
+        <div
+          style={{
+            background: '#e9f7fb',
+            margin: '0 8px',
+            padding: '10px 18px',
+            borderRadius: '999px',
+          }}
+        >
+          {tag}
+        </div>
+      );
+    }
   }
 
   return new ImageResponse(
