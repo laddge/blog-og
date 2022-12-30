@@ -15,24 +15,23 @@ export default async function og(req: NextRequest) {
   const fontData = await font;
 
   const title = searchParams.get('title');
-  const date = format(new Date(searchParams.get('date')), 'MMMM dd, yyyy');
+  let date = '';
+  date = format(new Date(searchParams.get('date') || 0), 'MMMM dd, yyyy');
   const category = searchParams.get('category');
   const tags = [];
-  if (searchParams.get('tags')) {
-    for (const tag of searchParams.get('tags').split(',')) {
-      tags.push(
-        <div
-          style={{
-            background: '#e9f7fb',
-            margin: '0 8px',
-            padding: '6px 18px',
-            borderRadius: '999px',
-          }}
-        >
-          {tag}
-        </div>
-      );
-    }
+  for (const tag of (searchParams.get('tags') || '').split(',')) {
+    tags.push(
+      <div
+        style={{
+          background: '#e9f7fb',
+          margin: '0 8px',
+          padding: '6px 18px',
+          borderRadius: '999px',
+        }}
+      >
+        {tag}
+      </div>
+    );
   }
 
   return new ImageResponse(
